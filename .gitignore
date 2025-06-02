@@ -1,0 +1,52 @@
+# Visual Studio general
+.vs/
+*.user
+*.suo
+
+# Archivos de compilación
+bin/
+obj/
+[Bb]uild/
+[Bb]uilds/
+out/
+Generated_Code/
+
+# Paquetes NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+*.psmdcp
+packages/
+*.log
+
+# Archivos temporales
+*.tmp
+*.bak
+*.old
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db
+
+# Archivos de configuración de entorno
+.env
+.env.*
+
+# Configs del Rider o VS Code (por si lo usas también)
+.idea/
+.vscode/
+
+# Archivos de configuración de usuario
+*.userprefs
+*.userosscache
+*.sln.docstates
+
+# Publicaciones
+publish/
+*.Publish.xml
+
+# Archivos generados por git merge/rebase
+*.orig
+
+# Archivos sensibles de ejemplo (permite uno de estos si quieres compartir el formato sin contenido)
+!*.env.example
