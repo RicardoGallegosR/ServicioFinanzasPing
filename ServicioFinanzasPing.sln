@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicioFinanzasPing", "ServicioFinanzasPing\ServicioFinanzasPing.csproj", "{1E67A840-77B2-4D3B-A5A0-9DDD74407FAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingAdip", "PingAdip\PingAdip.csproj", "{E4A42DE9-7708-403B-9329-BE879AA96F9F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{D107F4C8-89CC-BEA8-D3D7-CA6B7733353D}"
+	ProjectSection(SolutionItems) = preProject
+		.env = .env
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E67A840-77B2-4D3B-A5A0-9DDD74407FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E67A840-77B2-4D3B-A5A0-9DDD74407FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E67A840-77B2-4D3B-A5A0-9DDD74407FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E67A840-77B2-4D3B-A5A0-9DDD74407FAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4A42DE9-7708-403B-9329-BE879AA96F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4A42DE9-7708-403B-9329-BE879AA96F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4A42DE9-7708-403B-9329-BE879AA96F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4A42DE9-7708-403B-9329-BE879AA96F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97BC53EB-5B5F-470A-B7ED-6E4DCA67B98C}
+	EndGlobalSection
+EndGlobal
