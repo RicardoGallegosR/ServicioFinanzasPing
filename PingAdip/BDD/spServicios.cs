@@ -119,5 +119,21 @@ namespace PingAdip.BDD {
 
 
 
+        public async Task<string> ObtenerUltimaAlertaDescripcionAsync(int servicioWebId) {
+            using SqlConnection conn = new SqlConnection(_connection);
+            using SqlCommand cmd = new SqlCommand("Servicios.spUltimaAlertaServicioGet", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@ServicioWebId", servicioWebId);
+            await conn.OpenAsync();
+
+            var result = await cmd.ExecuteScalarAsync();
+            return result?.ToString() ?? "";
+        }
+
+
+
+
+
     }
 }

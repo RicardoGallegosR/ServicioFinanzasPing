@@ -34,22 +34,30 @@ namespace PingAdip.Monitoreo {
                     else if (fallos >= 3) estado = "Intermitente";
 
                     if (estado == "Estable") {
+                        var ultimaAlerta = await servicioPing.ObtenerUltimaAlertaDescripcionAsync(id);
+
+                        if (ultimaAlerta == "Caído" || ultimaAlerta == "Intermitente") {
+                            await bot.EnviarMensajeTelegramAsync($"El servicio {url} ha sido restablecido.");
+                            if (alertaTipos.TryGetValue("Recuperado", out byte alertaRecuperado)) {
+                                await servicioPing.InsertarNotificacionAsync(id, alertaRecuperado);
+                            } else {
+                                Console.WriteLine("No se encontró la alerta 'Recuperado' en el diccionario.");
+                            }
+
+                        }
+
                         Console.WriteLine($"Servicio {url} está estable.");
                         continue;
                     }
 
                     // 5. Notificar si es necesario
-                    if (alertaTipos.TryGetValue(estado, out byte alertaId)) {
+                    byte alertaId = 0;
+                    if (alertaTipos.TryGetValue(estado, out alertaId)) {
                         if (await servicioPing.PuedeNotificarAsync(id)) {
                             await servicioPing.InsertarNotificacionAsync(id, alertaId);
                             await bot.EnviarMensajeTelegramAsync($"⚠️ {estado}: El servicio {url} ha fallado {fallos}/{total} veces.");
-                        } else {
-                            Console.WriteLine($"Ya se notificó el estado '{estado}' recientemente para {url}.");
                         }
-                    } else {
-                        Console.WriteLine($"❗ No se encontró tipo de alerta para estado: {estado}");
                     }
-
                 } catch (Exception ex) {
                     Console.WriteLine($"Error con el servicio ID {id}: {ex.Message}");
                 }
