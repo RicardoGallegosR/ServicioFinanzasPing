@@ -1,4 +1,4 @@
-﻿using PingAdip.Credenciales;
+using PingAdip.Credenciales;
 using PingAdip.Ping;
 using PingAdip.BOT;
 using PingAdip.BDD;
@@ -16,24 +16,14 @@ class Program {
 
         Credenciales bot = new Credenciales();
 
-        var urls = new List<(string Nombre, string Url, int ServicioWebId)>
-        {
-            ("AdeudosFinanzasPuntosPOST", urlGen.AdeudosFinanzasPuntosPost(),1),
-            ("ListadoCarritosGet", urlGen.CatalogosCarritosGet(),2),
-            ("AdeudosFinanzasGet", urlGen.AdeudosFinanzasGet(),3)
-        };
+        bool isUp = await PingApi.IsServiceOnlineAsync(url2);
 
-        foreach (var (nombre, url, servicioId) in urls) {
-            bool isOnline = await PingApi.IsServiceOnlineAsync(url);
-            if (isOnline) {
-                Console.WriteLine($"El sistema {nombre} está en línea.");
-                await servicioPing.InsertarPingAsync(servicioId, true, "");
-            }
-            else {
-                Console.WriteLine($"El sistema {nombre} está caído.");
-                await servicioPing.InsertarPingAsync(servicioId, false, "PingFallo");
-            }
-        }
+        if (isUp) {
+            Console.WriteLine("El sistema está en línea.");
+            Console.WriteLine($"{bot.ObtenerEnlaceGetUpdates()}");
+            await bot.EnviarMensajeTelegramAsync("⚠️ El servicio falló: Finanzas CDMX");
+        } else {
+            Console.WriteLine("El sistema está caído.");
 
     }
 }
