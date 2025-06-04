@@ -16,12 +16,20 @@ namespace ServicioFinanzasPing {
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
             while (!stoppingToken.IsCancellationRequested) {
-                _logger.LogInformation("Ejecutando monitoreo a las {time}", DateTimeOffset.Now);
+                var horaActual = DateTime.Now.TimeOfDay;
+                var inicio = new TimeSpan(7, 0, 0);  
+                var fin = new TimeSpan(20, 0, 0);    
 
-                try {
-                    await _monitor.Monitor();
-                } catch (Exception ex) {
-                    _logger.LogError(ex, "Error durante el monitoreo.");
+                if (horaActual >= inicio && horaActual <= fin) {
+                    _logger.LogInformation("Ejecutando monitoreo a las {time}", DateTimeOffset.Now);
+
+                    try {
+                        await _monitor.Monitor();
+                    } catch (Exception ex) {
+                        _logger.LogError(ex, "Error durante el monitoreo.");
+                    }
+                } else {
+                    _logger.LogInformation("Fuera del horario de monitoreo. Hora actual: {time}", DateTimeOffset.Now);
                 }
 
                 await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);

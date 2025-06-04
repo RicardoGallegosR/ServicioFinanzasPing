@@ -55,7 +55,7 @@ namespace PingAdip.Monitoreo {
                     if (alertaTipos.TryGetValue(estado, out alertaId)) {
                         if (await servicioPing.PuedeNotificarAsync(id)) {
                             await servicioPing.InsertarNotificacionAsync(id, alertaId);
-                            await bot.EnviarMensajeTelegramAsync($"⚠️ {estado}: El servicio {url} ha fallado {fallos}/{total} veces.");
+                            await bot.EnviarMensajeTelegramAsync($"{estado}: El servicio {url} ha fallado {fallos}/{total} veces.");
                         }
                     }
                 } catch (Exception ex) {
