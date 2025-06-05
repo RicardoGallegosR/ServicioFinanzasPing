@@ -51,13 +51,17 @@ namespace PingAdip.Monitoreo {
                     }
 
                     // 5. Notificar si es necesario
-                    byte alertaId = 0;
-                    if (alertaTipos.TryGetValue(estado, out alertaId)) {
-                        if (await servicioPing.PuedeNotificarAsync(id)) {
+                    if (alertaTipos.TryGetValue(estado, out byte alertaId)) {
+                        var ultimaAlerta = await servicioPing.ObtenerUltimaAlertaDescripcionAsync(id);
+
+                        if (ultimaAlerta != estado) {
                             await servicioPing.InsertarNotificacionAsync(id, alertaId);
                             await bot.EnviarMensajeTelegramAsync($"{estado}: El servicio {url} ha fallado {fallos}/{total} veces.");
+                        } else {
+                            Console.WriteLine($"Ya se notificó que el servicio {url} está en estado '{estado}'. No se vuelve a notificar.");
                         }
                     }
+
                 } catch (Exception ex) {
                     Console.WriteLine($"Error con el servicio ID {id}: {ex.Message}");
                 }
